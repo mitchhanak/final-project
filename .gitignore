@@ -27,7 +27,7 @@ examples.txt
 grades.yml
 whitelist.yml
 cloud9_plugins.sh
-/appdev
+/.setup_runs
 cloud9_plugins.sh
 /node_modules
 package-json.lock

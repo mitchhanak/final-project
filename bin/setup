@@ -15,14 +15,14 @@ chdir APP_ROOT do
   # Add necessary setup steps to this file.
 
   runs = 0
-  runs_path = "appdev/runs"
+  runs_path = ".setup_runs"
   if !File.exist?(runs_path)
-    system! "mkdir appdev"
-    system! "echo '0' > appdev/runs"
+    system! "touch " + runs_path
+    system! "echo '0' > " + runs_path
     runs = open(runs_path).read.to_i
   else
     runs = open(runs_path).read.to_i
-    cmd = "echo '#{runs + 1}' > appdev/runs"
+    cmd = "echo '#{runs + 1}' > " + runs_path
     system! cmd
     runs = open(runs_path).read.to_i
   end

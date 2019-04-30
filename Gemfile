@@ -25,7 +25,6 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "console_ip_whitelist", github: "firstdraft/console_ip_whitelist"
   gem "dotenv-rails"
-  gem "draft_log", github: "firstdraft/draft_log"
   gem "grade_runner", github: "firstdraft/grade_runner"
   gem "pry-rails"
   gem "sqlite3", "~> 1.3", "< 1.4"
