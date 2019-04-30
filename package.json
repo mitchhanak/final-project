@@ -1,0 +1,24 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "This is a blank Rails application to use as a starting point for your project.",
+  "main": "index.js",
+  "dependencies": {
+    "diff2html-cli": "^2.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appdev-projects/final-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/appdev-projects/final-project/issues"
+  },
+  "homepage": "https://github.com/appdev-projects/final-project#readme"
+}
