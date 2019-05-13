@@ -1,0 +1,86 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Episode #<%= @episode.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/episodes" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/episodes/<%= @episode.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit episode
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_episode/<%= @episode.id %>" class="btn btn-block btn-outline-secondary">
+          Delete episode
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Created by
+      </dt>
+      <dd>
+        <%= @episode.created_by %>
+      </dd>
+
+      <dt>
+        Title
+      </dt>
+      <dd>
+        <%= @episode.title %>
+      </dd>
+
+      <dt>
+        Podcast
+      </dt>
+      <dd>
+        <%= @episode.podcast_id %>
+      </dd>
+
+      <dt>
+        Audio
+      </dt>
+      <dd>
+        <%= @episode.audio %>
+      </dd>
+
+      <dt>
+        Xml
+      </dt>
+      <dd>
+        <%= @episode.xml %>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @episode.description %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@episode.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@episode.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+

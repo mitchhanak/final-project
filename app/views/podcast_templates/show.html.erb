@@ -1,0 +1,65 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Podcast #<%= @podcast.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/podcasts" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/podcasts/<%= @podcast.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit podcast
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_podcast/<%= @podcast.id %>" class="btn btn-block btn-outline-secondary">
+          Delete podcast
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Created by
+      </dt>
+      <dd>
+        <%= @podcast.created_by %>
+      </dd>
+
+      <dt>
+        Logo
+      </dt>
+      <dd>
+        <%= @podcast.logo %>
+      </dd>
+
+      <dt>
+        Title
+      </dt>
+      <dd>
+        <%= @podcast.title %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@podcast.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@podcast.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+

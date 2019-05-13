@@ -1,0 +1,86 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Ad #<%= @ad.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/ads" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/ads/<%= @ad.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit ad
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_ad/<%= @ad.id %>" class="btn btn-block btn-outline-secondary">
+          Delete ad
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Created by
+      </dt>
+      <dd>
+        <%= @ad.created_by %>
+      </dd>
+
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @ad.name %>
+      </dd>
+
+      <dt>
+        Width
+      </dt>
+      <dd>
+        <%= @ad.width %>
+      </dd>
+
+      <dt>
+        Height
+      </dt>
+      <dd>
+        <%= @ad.height %>
+      </dd>
+
+      <dt>
+        Image
+      </dt>
+      <dd>
+        <%= @ad.image %>
+      </dd>
+
+      <dt>
+        Target url
+      </dt>
+      <dd>
+        <%= @ad.target_url %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@ad.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@ad.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+

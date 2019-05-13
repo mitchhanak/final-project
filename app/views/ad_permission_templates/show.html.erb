@@ -1,0 +1,58 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Ad permission #<%= @ad_permission.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/ad_permissions" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/ad_permissions/<%= @ad_permission.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit ad permission
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_ad_permission/<%= @ad_permission.id %>" class="btn btn-block btn-outline-secondary">
+          Delete ad permission
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Ad
+      </dt>
+      <dd>
+        <%= @ad_permission.ad_id %>
+      </dd>
+
+      <dt>
+        Podcast
+      </dt>
+      <dd>
+        <%= @ad_permission.podcast_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@ad_permission.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@ad_permission.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+

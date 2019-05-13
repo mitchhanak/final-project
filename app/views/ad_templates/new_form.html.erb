@@ -1,0 +1,67 @@
+<h1>
+  Add a new ad
+</h1>
+
+
+<hr>
+
+<form action="/create_ad" method="post">
+
+  <div class="form-group">
+    <label for="created_by">
+      Created by
+    </label>
+
+    <input type="text" id="created_by" name="created_by" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="width">
+      Width
+    </label>
+
+    <input type="text" id="width" name="width" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="height">
+      Height
+    </label>
+
+    <input type="text" id="height" name="height" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="image">
+      Image
+    </label>
+
+    <input type="text" id="image" name="image" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="target_url">
+      Target url
+    </label>
+
+    <input type="text" id="target_url" name="target_url" class="form-control">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create ad
+  </button>
+</form>
+
+<hr>
+
+<a href="/ads">
+  Go back
+</a>

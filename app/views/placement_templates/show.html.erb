@@ -1,0 +1,72 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Placement #<%= @placement.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/placements" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/placements/<%= @placement.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit placement
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_placement/<%= @placement.id %>" class="btn btn-block btn-outline-secondary">
+          Delete placement
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Position x
+      </dt>
+      <dd>
+        <%= @placement.position_x %>
+      </dd>
+
+      <dt>
+        Position y
+      </dt>
+      <dd>
+        <%= @placement.position_y %>
+      </dd>
+
+      <dt>
+        Ad
+      </dt>
+      <dd>
+        <%= @placement.ad_id %>
+      </dd>
+
+      <dt>
+        Episode
+      </dt>
+      <dd>
+        <%= @placement.episode_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@placement.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@placement.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+

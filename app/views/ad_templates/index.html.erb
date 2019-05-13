@@ -1,0 +1,106 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      All ads
+    </h1>
+
+    <a href="/ads/new" class="btn btn-block btn-outline-secondary">
+      Add a new ad
+    </a>
+  </div>
+</div>
+
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Created by
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Width
+        </th>
+
+        <th>
+          Height
+        </th>
+
+        <th>
+          Image
+        </th>
+
+        <th>
+          Target url
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @ads.each do |ad| %>
+      <tr>
+        <td>
+          <%= ad.id %>
+        </td>
+
+        <td>
+          <%= ad.created_by %>
+        </td>
+
+        <td>
+          <%= ad.name %>
+        </td>
+
+        <td>
+          <%= ad.width %>
+        </td>
+
+        <td>
+          <%= ad.height %>
+        </td>
+
+        <td>
+          <%= ad.image %>
+        </td>
+
+        <td>
+          <%= ad.target_url %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(ad.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(ad.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/ads/<%= ad.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

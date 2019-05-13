@@ -1,0 +1,66 @@
+<h1>
+  Edit episode #<%= @episode.id %>
+</h1>
+
+<hr>
+
+<form action="/update_episode/<%= @episode.id %>" method="post">
+
+  <div class="form-group">
+    <label for="created_by">
+      Created by
+    </label>
+
+    <input type="text" id="created_by" name="created_by" class="form-control" value="<%= @episode.created_by %>">
+  </div>
+
+  <div class="form-group">
+    <label for="title">
+      Title
+    </label>
+
+    <input type="text" id="title" name="title" class="form-control" value="<%= @episode.title %>">
+  </div>
+
+  <div class="form-group">
+    <label for="podcast_id">
+      Podcast
+    </label>
+
+    <input type="text" id="podcast_id" name="podcast_id" class="form-control" value="<%= @episode.podcast_id %>">
+  </div>
+
+  <div class="form-group">
+    <label for="audio">
+      Audio
+    </label>
+
+    <input type="text" id="audio" name="audio" class="form-control" value="<%= @episode.audio %>">
+  </div>
+
+  <div class="form-group">
+    <label for="xml">
+      Xml
+    </label>
+
+    <input type="text" id="xml" name="xml" class="form-control" value="<%= @episode.xml %>">
+  </div>
+
+  <div class="form-group">
+    <label for="description">
+      Description
+    </label>
+
+    <textarea id="description" name="description" class="form-control" rows="3"><%= @episode.description %></textarea>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update episode
+  </button>
+</form>
+
+<hr>
+
+<a href="/episodes">
+  Go back
+</a>

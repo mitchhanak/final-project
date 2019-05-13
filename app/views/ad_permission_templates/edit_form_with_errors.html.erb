@@ -1,0 +1,42 @@
+<% if @ad_permission.errors.any? %>
+  <% @ad_permission.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit ad permission #<%= @ad_permission.id %>
+</h1>
+
+<hr>
+
+<form action="/update_ad_permission/<%= @ad_permission.id %>" method="post">
+
+  <div class="form-group">
+    <label for="ad_id">
+      Ad
+    </label>
+
+    <input type="text" id="ad_id" name="ad_id" class="form-control" value="<%= @ad_permission.ad_id %>">
+  </div>
+
+  <div class="form-group">
+    <label for="podcast_id">
+      Podcast
+    </label>
+
+    <input type="text" id="podcast_id" name="podcast_id" class="form-control" value="<%= @ad_permission.podcast_id %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update ad permission
+  </button>
+</form>
+
+<hr>
+
+<a href="/ad_permissions">
+  Go back
+</a>

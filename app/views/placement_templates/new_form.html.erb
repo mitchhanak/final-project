@@ -1,0 +1,51 @@
+<h1>
+  Add a new placement
+</h1>
+
+
+<hr>
+
+<form action="/create_placement" method="post">
+
+  <div class="form-group">
+    <label for="position_x">
+      Position x
+    </label>
+
+    <input type="text" id="position_x" name="position_x" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="position_y">
+      Position y
+    </label>
+
+    <input type="text" id="position_y" name="position_y" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="ad_id">
+      Ad
+    </label>
+
+    <input type="text" id="ad_id" name="ad_id" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="episode_id">
+      Episode
+    </label>
+
+    <input type="text" id="episode_id" name="episode_id" class="form-control">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create placement
+  </button>
+</form>
+
+<hr>
+
+<a href="/placements">
+  Go back
+</a>

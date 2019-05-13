@@ -1,0 +1,50 @@
+<h1>
+  Edit placement #<%= @placement.id %>
+</h1>
+
+<hr>
+
+<form action="/update_placement/<%= @placement.id %>" method="post">
+
+  <div class="form-group">
+    <label for="position_x">
+      Position x
+    </label>
+
+    <input type="text" id="position_x" name="position_x" class="form-control" value="<%= @placement.position_x %>">
+  </div>
+
+  <div class="form-group">
+    <label for="position_y">
+      Position y
+    </label>
+
+    <input type="text" id="position_y" name="position_y" class="form-control" value="<%= @placement.position_y %>">
+  </div>
+
+  <div class="form-group">
+    <label for="ad_id">
+      Ad
+    </label>
+
+    <input type="text" id="ad_id" name="ad_id" class="form-control" value="<%= @placement.ad_id %>">
+  </div>
+
+  <div class="form-group">
+    <label for="episode_id">
+      Episode
+    </label>
+
+    <input type="text" id="episode_id" name="episode_id" class="form-control" value="<%= @placement.episode_id %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update placement
+  </button>
+</form>
+
+<hr>
+
+<a href="/placements">
+  Go back
+</a>

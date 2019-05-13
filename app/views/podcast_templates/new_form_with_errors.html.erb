@@ -1,0 +1,47 @@
+<!-- Validation failure messages -->
+<% if @podcast.present? %>
+  <% if @podcast.errors.any? %>
+    <% @podcast.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new podcast
+</h1>
+
+
+<hr>
+
+<form action="/create_podcast" method="post">
+
+  <div class="form-group">
+    <label for="title">
+      Title
+    </label>
+
+    <input type="text" id="title" name="title" class="form-control" value="<%= @podcast.title %>">
+  </div>
+  
+  <div class="form-group">
+    <label for="logo">
+      Logo
+    </label>
+
+    <input type="text" id="logo" name="logo" class="form-control" value="<%= @podcast.logo %>">
+  </div>
+
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create podcast
+  </button>
+</form>
+
+<hr>
+
+<a href="/podcasts">
+  Go back
+</a>

@@ -1,0 +1,66 @@
+<h1>
+  Edit ad #<%= @ad.id %>
+</h1>
+
+<hr>
+
+<form action="/update_ad/<%= @ad.id %>" method="post">
+
+  <div class="form-group">
+    <label for="created_by">
+      Created by
+    </label>
+
+    <input type="text" id="created_by" name="created_by" class="form-control" value="<%= @ad.created_by %>">
+  </div>
+
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control" value="<%= @ad.name %>">
+  </div>
+
+  <div class="form-group">
+    <label for="width">
+      Width
+    </label>
+
+    <input type="text" id="width" name="width" class="form-control" value="<%= @ad.width %>">
+  </div>
+
+  <div class="form-group">
+    <label for="height">
+      Height
+    </label>
+
+    <input type="text" id="height" name="height" class="form-control" value="<%= @ad.height %>">
+  </div>
+
+  <div class="form-group">
+    <label for="image">
+      Image
+    </label>
+
+    <input type="text" id="image" name="image" class="form-control" value="<%= @ad.image %>">
+  </div>
+
+  <div class="form-group">
+    <label for="target_url">
+      Target url
+    </label>
+
+    <input type="text" id="target_url" name="target_url" class="form-control" value="<%= @ad.target_url %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update ad
+  </button>
+</form>
+
+<hr>
+
+<a href="/ads">
+  Go back
+</a>

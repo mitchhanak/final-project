@@ -1,0 +1,35 @@
+<h1>
+  Add a new ad permission
+</h1>
+
+
+<hr>
+
+<form action="/create_ad_permission" method="post">
+
+  <div class="form-group">
+    <label for="ad_id">
+      Ad
+    </label>
+
+    <input type="text" id="ad_id" name="ad_id" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="podcast_id">
+      Podcast
+    </label>
+
+    <input type="text" id="podcast_id" name="podcast_id" class="form-control">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create ad permission
+  </button>
+</form>
+
+<hr>
+
+<a href="/ad_permissions">
+  Go back
+</a>

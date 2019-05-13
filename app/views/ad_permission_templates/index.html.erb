@@ -1,0 +1,74 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      All ad permissions
+    </h1>
+
+    <a href="/ad_permissions/new" class="btn btn-block btn-outline-secondary">
+      Add a new ad permission
+    </a>
+  </div>
+</div>
+
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Ad
+        </th>
+
+        <th>
+          Podcast
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @ad_permissions.each do |ad_permission| %>
+      <tr>
+        <td>
+          <%= ad_permission.id %>
+        </td>
+
+        <td>
+          <%= ad_permission.ad_id %>
+        </td>
+
+        <td>
+          <%= ad_permission.podcast_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(ad_permission.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(ad_permission.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/ad_permissions/<%= ad_permission.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

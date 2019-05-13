@@ -1,0 +1,90 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      All placements
+    </h1>
+
+    <a href="/placements/new" class="btn btn-block btn-outline-secondary">
+      Add a new placement
+    </a>
+  </div>
+</div>
+
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Position x
+        </th>
+
+        <th>
+          Position y
+        </th>
+
+        <th>
+          Ad
+        </th>
+
+        <th>
+          Episode
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @placements.each do |placement| %>
+      <tr>
+        <td>
+          <%= placement.id %>
+        </td>
+
+        <td>
+          <%= placement.position_x %>
+        </td>
+
+        <td>
+          <%= placement.position_y %>
+        </td>
+
+        <td>
+          <%= placement.ad_id %>
+        </td>
+
+        <td>
+          <%= placement.episode_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(placement.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(placement.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/placements/<%= placement.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
