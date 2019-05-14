@@ -1,5 +1,4 @@
 class PodcastsController < ApplicationController
-
   
   def index
     @podcasts = Podcast.all
@@ -22,15 +21,20 @@ class PodcastsController < ApplicationController
   def create_row
     @podcast = Podcast.new
 
-##    @podcast.logo = params.fetch("logo")
-    @podcast.title = params.fetch("title")
-    @podcast.created_by = params.fetch("created_by")
-    uploads = {}
-    uploads[:uplogo] = Cloudinary::Uploader.upload(params.fetch("logo"), 
-      :folder => "final2-051319/")
-    @podcast.logo = uploads.first.fetch('url')
+    @podcast.logo = params[:logo]
+    @podcast.title = params[:title]
+    @podcast.created_by = params[:created_by]
+##    uploads = {}
+##    uploads[:uplogo] = Cloudinary::Uploader.upload(params.fetch("logo"), 
+##      :folder => "final2-051319/")
+##    @podcast.logo = uploads.first.fetch('url')
     
-
+##    if params[:logo].present?
+##    preloaded = Cloudinary::PreloadedFile.new(params[:logo])         
+##    raise "Invalid upload signature" if !preloaded.valid?
+##    @podcast.logo = preloaded.identifier
+##    end
+    
     if @podcast.valid?
       @podcast.save
 

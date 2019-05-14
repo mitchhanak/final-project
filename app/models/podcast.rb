@@ -16,4 +16,5 @@ class Podcast < ApplicationRecord
     has_many :ad_permissions, :dependent => :destroy
     has_many :ads, :through => :ad_permissions, :source => :ad
 
+    mount_uploader :logo, LogoUploader
 end

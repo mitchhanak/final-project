@@ -56,7 +56,11 @@
         </td>
 
         <td>
-          <%= podcast.logo %>
+          <% if podcast.logo.file.nil? %>
+          No logo
+          <% else %>
+          <%= image_tag(podcast.logo_url(:thumbnail), :width => 50, :height => 50) %>
+          <% end %>
         </td>
 
         <td>

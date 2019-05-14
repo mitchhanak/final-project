@@ -119,6 +119,10 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.2)
       xpath (~> 3.2)
+    carrierwave (1.3.1)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     cloudinary (1.11.1)
       aws_cf_signer
       rest-client
@@ -384,6 +388,7 @@ DEPENDENCIES
   binding_of_caller
   byebug
   capybara
+  carrierwave
   cloudinary
   console_ip_whitelist!
   dev_toolbar!

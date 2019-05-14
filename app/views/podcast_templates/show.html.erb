@@ -31,19 +31,20 @@
       <dd>
         <%= @podcast.created_by %>
       </dd>
-
-      <dt>
-        Logo
-      </dt>
-      <dd>
-        <%= @podcast.logo %>
-      </dd>
-
+      
       <dt>
         Title
       </dt>
       <dd>
         <%= @podcast.title %>
+      </dd>
+      
+      <dt>
+        Logo
+      </dt>
+      <dd>
+        <%= cl_image_tag(@podcast.logo.full_public_id, :format => "jpg", :radius => 10) %>
+        <%= image_tag(@podcast.logo_url(:thumbnail), :width => 50, :height => 50) %>
       </dd>
 
       <dt>
