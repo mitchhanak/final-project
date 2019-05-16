@@ -79,7 +79,7 @@ Rails.application.routes.draw do
   # Routes for the Episode resource:
 
   # CREATE
-  get("/episodes/new", { :controller => "episodes", :action => "new_form" })
+  get("/episodes/new/:podcastid", { :controller => "episodes", :action => "new_form" })
   post("/create_episode", { :controller => "episodes", :action => "create_row" })
 
   # READ

@@ -24,43 +24,67 @@
       </div>
     </div>
 
-    <dl>
-      <dt>
-        Created by
-      </dt>
-      <dd>
-        <%= @podcast.created_by %>
-      </dd>
+    <table>
+      <tr>
+        <td width="500px" valign="top">
+          <dl>
+            <dt>
+              Created by
+            </dt>
+          <dd>
+            <%= @podcast.created_by %>
+          </dd>
       
-      <dt>
-        Title
-      </dt>
-      <dd>
-        <%= @podcast.title %>
-      </dd>
+        <dt>
+          Title
+        </dt>
+        <dd>
+          <%= @podcast.title %>
+        </dd>
       
-      <dt>
-        Logo
-      </dt>
-      <dd>
-        <%= cl_image_tag(@podcast.logo.full_public_id, :format => "jpg", :radius => 10) %>
-        <%= image_tag(@podcast.logo_url(:thumbnail), :width => 50, :height => 50) %>
-      </dd>
+        <dt>
+          Logo
+        </dt>
+        <dd>
+          <%= cl_image_tag(@podcast.logo.full_public_id, :format => "jpg", :width => 450, :radius => 10) %>
+        </dd>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@podcast.created_at) %> ago
-      </dd>
+        <dt>
+          Created at
+        </dt>
+        <dd>
+          <%= time_ago_in_words(@podcast.created_at) %> ago
+        </dd>
 
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@podcast.updated_at) %> ago
-      </dd>
-    </dl>
+        <dt>
+          Updated at
+        </dt>
+        <dd>
+          <%= time_ago_in_words(@podcast.updated_at) %> ago
+        </dd>
+      </dl>
+    </td>
+    <td width="500px" valign="top">
+      <h1>Episodes</h1>
+      <a href="/episodes/new/<%= @podcast.id %>" class="btn btn-block btn-outline-secondary">
+      Add a new episode
+    </a>
+    
+      <table>
+        <tr>
+          <th width="50%"></th>
+          <th width="40%"></th>
+          <th width="10%"></th>
+        </tr>
+        <% @episodes = Episode.where({:podcast_id => @podcast.id}).order(:created_at => :desc) %>
+        <% @episodes.each do |episode| %>
+        <tr>
+          <td><a href="/episodes/<%= episode.id %>"><b><%= episode.title %></b></a> <p><%= episode.description %></p> </td>
+          <td>Created <%= time_ago_in_words(episode.created_at) %> ago </br> by <%= User.where({ :id=> episode.created_by }).first.username %></td>
+          <td></td>
+        </tr>
+        <% end %>
+      </table>
   </div>
 </div>
 

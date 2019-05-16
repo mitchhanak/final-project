@@ -6,15 +6,15 @@
 <hr>
 
 <form action="/create_episode" method="post">
-
-  <div class="form-group">
+<div style="width:50%">
+    <div class="form-group">
     <label for="created_by">
-      Created by
+      Your ID
     </label>
 
     <input type="text" id="created_by" name="created_by" class="form-control">
   </div>
-
+  
   <div class="form-group">
     <label for="title">
       Title
@@ -28,23 +28,15 @@
       Podcast
     </label>
 
-    <input type="text" id="podcast_id" name="podcast_id" class="form-control">
+    <input type="text" id="podcast_id" name="podcast_id" class="form-control" value="<%= @podcast %>">
   </div>
 
   <div class="form-group">
     <label for="audio">
-      Audio
+      Audio (Coming soon)
     </label>
 
-    <input type="text" id="audio" name="audio" class="form-control">
-  </div>
-
-  <div class="form-group">
-    <label for="xml">
-      Xml
-    </label>
-
-    <input type="text" id="xml" name="xml" class="form-control">
+    <input type="file" id="audio" name="audio" class="form-control">
   </div>
 
   <div class="form-group">
@@ -58,8 +50,8 @@
   <button class="btn btn-block btn-outline-secondary">
     Create episode
   </button>
+  </div>
 </form>
-
 <hr>
 
 <a href="/episodes">

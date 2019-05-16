@@ -13,7 +13,11 @@ class EpisodesController < ApplicationController
 
   def new_form
     @episode = Episode.new
-
+    if params.fetch("podcastid").nil?
+      @podcast = nil
+    else
+      @podcast = params.fetch("podcastid")
+    end
     render("episode_templates/new_form.html.erb")
   end
 
@@ -23,14 +27,13 @@ class EpisodesController < ApplicationController
     @episode.created_by = params.fetch("created_by")
     @episode.title = params.fetch("title")
     @episode.podcast_id = params.fetch("podcast_id")
-    @episode.audio = params.fetch("audio")
-    @episode.xml = params.fetch("xml")
+##    @episode.audio = params.fetch("audio")
+##    @episode.xml = params.fetch("xml")
     @episode.description = params.fetch("description")
 
     if @episode.valid?
       @episode.save
-
-      redirect_back(:fallback_location => "/episodes", :notice => "Episode created successfully.")
+      redirect_to controller:'podcasts', action:'show', id: @episode.podcast_id
     else
       render("episode_templates/new_form_with_errors.html.erb")
     end
