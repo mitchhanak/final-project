@@ -19,21 +19,21 @@ class PlacementsController < ApplicationController
   end
 
   def create_row
-    @placement = Placement.new
+    @placement = current_user.placements.new
     @episode = Episode.find(params.fetch("episodeid"))
 
     @placement.position_x = params.fetch("position_x")
     @placement.position_y = params.fetch("position_y")
     @placement.ad_id = params.fetch("ad_id")
-##    @placement.episode_id = params.fetch("episode_id")
+    @placement.episode_id = @episode.id
 ##    @placement.created_by = params.fetch("created_by")
-    @placement.timestamp_start = params.fetch("timestamp_start")
-    @placement.timestamp_end = params.fetch("timestamp_end")
+##    @placement.timestamp_start = params.fetch("timestamp_start")
+##    @placement.timestamp_end = params.fetch("timestamp_end")
 
     if @placement.valid?
       @placement.save
 
-      redirect_to("/episodes/" + @episode.id)
+      redirect_to("/episodes/" + @episode.id.to_s)
     else
       render("placement_templates/new_form_with_errors.html.erb")
     end

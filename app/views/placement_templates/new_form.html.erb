@@ -29,7 +29,7 @@
     </label>
 
     <select id="ad_id" name="ad_id" class="form-control">
-      <% current_user.ads.each do |ad| %>
+      <% Ad.all.order( :created_at => :desc ).each do |ad| %>
       <option value="<%= ad.id %>">
         <%= ad.name %>
       </option>

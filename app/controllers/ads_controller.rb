@@ -19,7 +19,7 @@ class AdsController < ApplicationController
   end
 
   def create_row
-    @ad = current_user.ads.new
+    @ad = Ad.new
 
     @ad.created_by = current_user.id
     @ad.name = params.fetch("name")

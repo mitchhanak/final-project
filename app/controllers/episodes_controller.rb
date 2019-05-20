@@ -8,6 +8,7 @@ class EpisodesController < ApplicationController
   def show
     @episode = Episode.find(params.fetch("id_to_display"))
     @podcast = Podcast.find(@episode.podcast_id)
+    @placements = Placement.where({ :episode_id => @episode.id }).order(:created_at => :desc)
 
     render("episode_templates/show.html.erb")
   end
