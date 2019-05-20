@@ -24,47 +24,32 @@
       </div>
     </div>
 
-    <table>
-      <tr>
-        <td width="500px" valign="top">
-          <dl>
-            <dt>
-              Created by
-            </dt>
-          <dd>
-            <%= @podcast.created_by %>
-          </dd>
-      
-        <dt>
-          Title
-        </dt>
-        <dd>
-          <%= @podcast.title %>
-        </dd>
-      
-        <dt>
-          Logo
-        </dt>
-        <dd>
-          <%= cl_image_tag(@podcast.logo.full_public_id, :format => "jpg", :width => 450, :radius => 10) %>
-        </dd>
 
-        <dt>
-          Created at
-        </dt>
-        <dd>
-          <%= time_ago_in_words(@podcast.created_at) %> ago
-        </dd>
+    <dl>
+      <dt>
+        Title
+      </dt>
+      <dd>
+        <%= @podcast.title %>
+      </dd>
+    
+      <dt>
+        Logo
+      </dt>
+      <dd>
+        <%= cl_image_tag(@podcast.logo.full_public_id, :format => "jpg", :width => 450, :radius => 10) %>
+      </dd>
+      <dt>
+        System Information
+      </dt>
+      <dd>
+        Created by <%= @owner.username %> <%= time_ago_in_words(@podcast.created_at) %> ago
+      </dd>
+      <dd>
+        Last updated <%= time_ago_in_words(@podcast.updated_at) %> ago
+      </dd>
+    </dl>
 
-        <dt>
-          Updated at
-        </dt>
-        <dd>
-          <%= time_ago_in_words(@podcast.updated_at) %> ago
-        </dd>
-      </dl>
-    </td>
-    <td width="500px" valign="top">
       <h1>Episodes</h1>
       <a href="/episodes/new/<%= @podcast.id %>" class="btn btn-block btn-outline-secondary">
       Add a new episode

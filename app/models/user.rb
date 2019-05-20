@@ -27,6 +27,7 @@ class User < ApplicationRecord
 has_many :episodes, :foreign_key => "created_by", :dependent => :destroy
 has_many :placements, :foreign_key => "created_by", :dependent => :destroy
 has_many :podcasts, :foreign_key => "created_by", :dependent => :destroy
+has_many :ads, :foreign_key => "created_by", :dependent => :destroy
 has_many :ad_permissions, :through => :podcasts, :source => :ad_permissions
 has_many :ads, :through => :podcasts, :source => :ads
 

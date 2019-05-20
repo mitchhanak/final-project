@@ -1,13 +1,14 @@
 class PodcastsController < ApplicationController
   
   def index
-    @podcasts = Podcast.all
+    @podcasts = current_user.podcasts
 
     render("podcast_templates/index.html.erb")
   end
 
   def show
     @podcast = Podcast.find(params.fetch("id_to_display"))
+    @owner = User.where({ :id => @podcast.created_by }).at(0)
 
     render("podcast_templates/show.html.erb")
   end
@@ -19,26 +20,15 @@ class PodcastsController < ApplicationController
   end
 
   def create_row
-    @podcast = Podcast.new
+    @podcast = current_user.podcasts.new
 
     @podcast.logo = params[:logo]
     @podcast.title = params[:title]
-    @podcast.created_by = params[:created_by]
-##    uploads = {}
-##    uploads[:uplogo] = Cloudinary::Uploader.upload(params.fetch("logo"), 
-##      :folder => "final2-051319/")
-##    @podcast.logo = uploads.first.fetch('url')
-    
-##    if params[:logo].present?
-##    preloaded = Cloudinary::PreloadedFile.new(params[:logo])         
-##    raise "Invalid upload signature" if !preloaded.valid?
-##    @podcast.logo = preloaded.identifier
-##    end
     
     if @podcast.valid?
       @podcast.save
 
-      redirect_back(:fallback_location => "/podcasts", :notice => "Podcast created successfully.")
+      redirect_to("/podcasts/" + @podcast.id.to_s)
     else
       render("podcast_templates/new_form_with_errors.html.erb")
     end

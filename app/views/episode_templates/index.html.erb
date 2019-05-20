@@ -1,29 +1,16 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      All episodes
+      My episodes
     </h1>
-
-    <a href="/episodes/new" class="btn btn-block btn-outline-secondary">
-      Add a new episode
-    </a>
+    Add new episodes via the details page of a podcast
   </div>
 </div>
-
-
-<hr>
 
 <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
       <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Created by
-        </th>
 
         <th>
           Title
@@ -34,19 +21,11 @@
         </th>
 
         <th>
-          Audio
-        </th>
-
-        <th>
-          Xml
-        </th>
-
-        <th>
           Description
         </th>
-
+        
         <th>
-          Created at
+          Created by
         </th>
 
         <th>
@@ -57,45 +36,32 @@
         </th>
       </tr>
 
-      <% @episodes.each do |episode| %>
+      <% @episodes.order( :created_at => :desc ).each do |episode| %>
+      <% podcast = Podcast.find(episode.podcast_id) %>
       <tr>
+
         <td>
-          <%= episode.id %>
+          <a href="/episodes/<%= episode.id %>" ><%= episode.title %></a>
         </td>
 
         <td>
-          <%= episode.created_by %>
-        </td>
-
-        <td>
-          <%= episode.title %>
-        </td>
-
-        <td>
-          <%= episode.podcast_id %>
-        </td>
-
-        <td>
-          <%= episode.audio %>
-        </td>
-
-        <td>
-          <%= episode.xml %>
+          <%= image_tag(podcast.logo_url(:thumbnail), :width => 50, :height => 50) %><a href="/podcasts/<%= podcast.id %>"</a><%= podcast.title %>
         </td>
 
         <td>
           <%= episode.description %>
         </td>
-
+        
         <td>
-          <%= time_ago_in_words(episode.created_at) %> ago
+          <%= User.find(episode.created_by).username %>, <%= time_ago_in_words(episode.created_at) %> ago
         </td>
+        
         <td>
           <%= time_ago_in_words(episode.updated_at) %> ago
         </td>
 
         <td>
-          <a href="/episodes/<%= episode.id %>">
+          <a href="/episodes/<%= episode.id %>" class="btn btn-block btn-outline-secondary">
             Show details
           </a>
         </td>

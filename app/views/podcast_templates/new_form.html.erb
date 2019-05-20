@@ -8,13 +8,6 @@
 <hr>
 
 <form action="/create_podcast" method="post" enctype="multipart/form-data">
-  <div class="form-group">
-    <label for="created_by">
-      Your ID
-    </label>
-
-    <input type="text" id="created_by" name="created_by" class="form-control">
-  </div>
 
   <div class="form-group">
     <label for="title">
@@ -32,19 +25,6 @@
     <input type="file" id="logo" name="logo" class="form-control">
   </div>
 
-
-<!--
-    <%= form_for(@podcast) do |p| %>
-      <%= p.label :created_by %>
-      <%= p.text_field(:created_by) %>
-      <%= p.label :title %>
-      <%= p.text_field(:title) %>
-      <%= p.label :logo %>
-      <%= p.hidden_field(:logo) %>
-      <%= p.file_field(:uplogo) %>
-      <%= submit_tag("Create new podcast") %>
-    <% end %>
--->
   <button class="btn btn-block btn-outline-secondary">
     Create podcast
   </button>

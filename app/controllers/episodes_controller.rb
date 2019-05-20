@@ -7,33 +7,29 @@ class EpisodesController < ApplicationController
 
   def show
     @episode = Episode.find(params.fetch("id_to_display"))
+    @podcast = Podcast.find(@episode.podcast_id)
 
     render("episode_templates/show.html.erb")
   end
 
   def new_form
-    @episode = Episode.new
-    if params.fetch("podcastid").nil?
-      @podcast = nil
-    else
-      @podcast = params.fetch("podcastid")
-    end
+    @podcast = Podcast.where({ :id => params.fetch("podcastid")}).at(0)
     render("episode_templates/new_form.html.erb")
   end
 
   def create_row
-    @episode = Episode.new
+    @podcast = Podcast.where({ :id => params.fetch("podcastid")}).at(0)
+    @episode = current_user.episodes.new
 
-    @episode.created_by = params.fetch("created_by")
     @episode.title = params.fetch("title")
-    @episode.podcast_id = params.fetch("podcast_id")
+    @episode.podcast_id = @podcast.id
 ##    @episode.audio = params.fetch("audio")
 ##    @episode.xml = params.fetch("xml")
     @episode.description = params.fetch("description")
 
     if @episode.valid?
       @episode.save
-      redirect_to controller:'podcasts', action:'show', id: @episode.podcast_id
+      redirect_to("/episodes/" + @episode.id.to_s)
     else
       render("episode_templates/new_form_with_errors.html.erb")
     end

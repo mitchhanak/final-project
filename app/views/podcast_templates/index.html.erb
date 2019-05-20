@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      All podcasts
+      My podcasts
     </h1>
 
     <a href="/podcasts/new" class="btn btn-block btn-outline-secondary">
@@ -14,85 +14,47 @@
 <hr>
 
 <div class="row mb-3">
-  <div class="col-md-12">
-    <table>
-      <tr>
-      <td>
-    <table class="table">
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Created by
-        </th>
-
-        <th>
-          Logo
-        </th>
-
-        <th>
-          Title
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @podcasts.each do |podcast| %>
-      <tr>
-        <td>
-          <%= podcast.id %>
-        </td>
-
-        <td>
-          <%= podcast.created_by %>
-        </td>
-
-        <td>
-          <% if podcast.logo.file.nil? %>
-          No logo
-          <% else %>
-          <%= image_tag(podcast.logo_url(:thumbnail), :width => 50, :height => 50) %>
-          <% end %>
-        </td>
-
-        <td>
-          <%= podcast.title %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(podcast.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(podcast.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/podcasts/<%= podcast.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-    </td>
-
-    </td>
+  <div class="col-lg-16">
+    
+    <div class="card-deck">
+      <% cards = 0 %>
+      <% @podcasts.order( :created_at => :desc ).each do |podcast| %>
+      <% if cards % 3 == 0 %>
+    </div>
+    
   </div>
 </div>
-
-<table>
-  <tr>
-    <th>Episode</th>
-  </tr>
-</table>
+<div class="row mb-3">
+  <div class="col-lg-16">
+    
+    <div class="card-deck">
+      <% end %>
+      <div class="card bg-dark text-white" style="max-width: 30%">
+          <% if podcast.logo.file.nil? %>
+          No image
+          <% else %>
+          <img class="card-img-top" src="<%= podcast.logo_url %>">
+          <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= podcast.title %></h5>
+          <p class="card-text small">Created by <%= User.find(podcast.created_by).username %> <%= time_ago_in_words(podcast.created_at) %> ago</p>
+      
+          <ul class="nav nav-pills card-footer-pills small">
+            <li class="nav-item">
+              <a class="nav-link" href="/podcasts/<%= podcast.id %>" class="btn btn-secondary btn-sm">Show details</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/episodes/new/<%= podcast.id %>" class="btn btn-primary btn-sm">Add episode</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated <%= time_ago_in_words(podcast.updated_at) %></small>
+        </div>
+      </div>
+      <% cards = cards + 1 %>
+      <% end %>
+    
+    </div>
+  </div>
+</div>

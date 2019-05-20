@@ -1,0 +1,68 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      My podcasts
+    </h1>
+
+    <a href="/podcasts/new" class="btn btn-block btn-outline-secondary">
+      Add a new podcast
+    </a>
+  </div>
+</div>
+
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+        </th>
+        <th>
+          Title
+        </th>
+        
+        <th>
+          Created by
+        </th>
+
+        <th></th>
+        <th></th>
+      </tr>
+
+      <% @podcasts.order( :created_at => :desc ).each do |podcast| %>
+      <tr>
+
+        <td>
+          <% if podcast.logo.file.nil? %>
+          No logo
+          <% else %>
+          <%= image_tag(podcast.logo_url(:thumbnail), :width => 50, :height => 50) %>
+          <% end %>
+        </td>
+
+        <td>
+          <b><%= podcast.title %></b>
+        </td>
+        
+        <td>
+          <%= User.find(podcast.created_by).username %>, <%= time_ago_in_words(podcast.created_at) %> ago
+        </td>
+
+        <td>
+          <a href="/podcasts/<%= podcast.id %>" class="btn btn-block btn-outline-secondary">
+            Show details
+          </a>
+        </td>
+        
+        <td>
+          <a href="/episodes/new/<%= podcast.id %>" class="btn btn-block btn-outline-secondary">
+            Add a new episode
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

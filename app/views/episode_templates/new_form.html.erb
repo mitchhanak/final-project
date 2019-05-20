@@ -1,34 +1,18 @@
 <h1>
-  Add a new episode
+  Add a new episode to <%= image_tag(@podcast.logo_url(:thumbnail), :width => 50, :height => 50) %> <%= @podcast.title %>
 </h1>
 
 
 <hr>
 
-<form action="/create_episode" method="post">
-<div style="width:50%">
-    <div class="form-group">
-    <label for="created_by">
-      Your ID
-    </label>
+<form action="/create_episode/<%= @podcast.id %>" method="post">
 
-    <input type="text" id="created_by" name="created_by" class="form-control">
-  </div>
-  
   <div class="form-group">
     <label for="title">
-      Title
+      Episode Title
     </label>
 
-    <input type="text" id="title" name="title" class="form-control">
-  </div>
-
-  <div class="form-group">
-    <label for="podcast_id">
-      Podcast
-    </label>
-
-    <input type="text" id="podcast_id" name="podcast_id" class="form-control" value="<%= @podcast %>">
+    <input type="text" id="title" name="title" class="form-control" placeholder="Enter episode title...">
   </div>
 
   <div class="form-group">
@@ -44,13 +28,12 @@
       Description
     </label>
 
-    <textarea id="description" name="description" class="form-control" rows="3"></textarea>
+    <textarea id="description" name="description" class="form-control" rows="3" placeholder="Give this episode a description..."></textarea>
   </div>
 
   <button class="btn btn-block btn-outline-secondary">
     Create episode
   </button>
-  </div>
 </form>
 <hr>
 

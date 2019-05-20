@@ -26,13 +26,6 @@
 
     <dl>
       <dt>
-        Created by
-      </dt>
-      <dd>
-        <%= @episode.created_by %>
-      </dd>
-
-      <dt>
         Title
       </dt>
       <dd>
@@ -43,7 +36,7 @@
         Podcast
       </dt>
       <dd>
-        <%= @episode.podcast_id %>
+        <a href="/podcasts/<%= @podcast.id %>"<a><%= image_tag(@podcast.logo_url(:thumbnail), :width => 50, :height => 50) %> <%= @podcast.title %></a>
       </dd>
 
       <dt>
@@ -54,33 +47,40 @@
       </dd>
 
       <dt>
-        Xml
-      </dt>
-      <dd>
-        <%= @episode.xml %>
-      </dd>
-
-      <dt>
         Description
       </dt>
       <dd>
         <%= @episode.description %>
       </dd>
-
-      <dt>
-        Created at
-      </dt>
+      <dt>System info</dt>
       <dd>
-        <%= time_ago_in_words(@episode.created_at) %> ago
+        Created by <%= User.find(@episode.created_by).username %> <%= time_ago_in_words(@episode.created_at) %> ago
       </dd>
-
-      <dt>
-        Updated at
-      </dt>
       <dd>
-        <%= time_ago_in_words(@episode.updated_at) %> ago
+        Updated <%= time_ago_in_words(@episode.updated_at) %> ago
       </dd>
     </dl>
+    
+    <h1>Ad Placements</h1>
+    <a href="/placements/new/<%= @episode.id %>" class="btn btn-block btn-outline-secondary">
+      Add a new ad placement
+    </a>
+    
+      <table>
+        <tr>
+          <th width="50%"></th>
+          <th width="40%"></th>
+          <th width="10%"></th>
+        </tr>
+        <% @placements = Placement.where({:episode_id => @episode.id}).order(:created_at => :desc) %>
+        <% @placements.each do |placement| %>
+        <tr>
+          <td><a href="/placements/<%= placement.id %>"><b><%= placement.id %></b></a></td>
+          <td>Created <%= time_ago_in_words(episode.created_at) %> ago </br> by <%= User.where({ :id=> episode.created_by }).first.username %></td>
+          <td><a href="/placements/<%= placement.id %>" class="btn btn-block btn-outline-primary">Show details</a></td>
+        </tr>
+        <% end %>
+      </table>
   </div>
 </div>
 

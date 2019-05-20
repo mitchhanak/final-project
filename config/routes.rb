@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  get("/", {:controller => "podcasts", :action => "index" })
+
   # Routes for the Ad permission resource:
 
   # CREATE
@@ -22,8 +25,8 @@ Rails.application.routes.draw do
   # Routes for the Placement resource:
 
   # CREATE
-  get("/placements/new", { :controller => "placements", :action => "new_form" })
-  post("/create_placement", { :controller => "placements", :action => "create_row" })
+  get("/placements/new/:episodeid", { :controller => "placements", :action => "new_form" })
+  post("/create_placement/:episodeid", { :controller => "placements", :action => "create_row" })
 
   # READ
   get("/placements", { :controller => "placements", :action => "index" })
@@ -80,7 +83,7 @@ Rails.application.routes.draw do
 
   # CREATE
   get("/episodes/new/:podcastid", { :controller => "episodes", :action => "new_form" })
-  post("/create_episode", { :controller => "episodes", :action => "create_row" })
+  post("/create_episode/:podcastid", { :controller => "episodes", :action => "create_row" })
 
   # READ
   get("/episodes", { :controller => "episodes", :action => "index" })

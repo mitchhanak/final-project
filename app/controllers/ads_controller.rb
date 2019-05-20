@@ -19,19 +19,19 @@ class AdsController < ApplicationController
   end
 
   def create_row
-    @ad = Ad.new
+    @ad = current_user.ads.new
 
-    @ad.created_by = params.fetch("created_by")
+    @ad.created_by = current_user.id
     @ad.name = params.fetch("name")
-    @ad.width = params.fetch("width")
-    @ad.height = params.fetch("height")
-    @ad.image = params.fetch("image")
+##    @ad.width = params.fetch("width")
+##    @ad.height = params.fetch("height")
+##    @ad.image = params.fetch("image")
     @ad.target_url = params.fetch("target_url")
 
     if @ad.valid?
       @ad.save
 
-      redirect_back(:fallback_location => "/ads", :notice => "Ad created successfully.")
+      redirect_to("/ads/" + @ad.id.to_s)
     else
       render("ad_templates/new_form_with_errors.html.erb")
     end
