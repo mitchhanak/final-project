@@ -8,6 +8,7 @@ class AdsController < ApplicationController
 
   def show
     @ad = Ad.find(params.fetch("id_to_display"))
+    @placements = @ad.placements.order( :timestamp_start => :desc )
 
     render("ad_templates/show.html.erb")
   end
@@ -28,7 +29,7 @@ class AdsController < ApplicationController
     
     if @ad.valid?
       @ad.save
-
+      
       redirect_to("/ads/" + @ad.id.to_s)
     else
       render("ad_templates/new_form_with_errors.html.erb")
