@@ -18,4 +18,6 @@ class Episode < ApplicationRecord
     has_many :placements, :dependent => :destroy
     belongs_to :podcast
     has_many :ads, :through => :placements, :source => :ad
+    
+    mount_uploader :audio, AudioUploader
 end

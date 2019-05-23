@@ -1,4 +1,4 @@
-class LogoUploader < CarrierWave::Uploader::Base
+class AdUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -15,10 +15,10 @@ class LogoUploader < CarrierWave::Uploader::Base
   end
 
   process :convert => 'png'
-  process :tags => ['logo_picture']
+  process :tags => ['ad_picture']
 
   version :standard do
-    process :resize_to_fill => [1400, 1400, :center]
+    process :resize_to_fit => [1500, 1500, :center]
   end
 
   version :thumbnail do

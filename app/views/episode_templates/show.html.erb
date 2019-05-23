@@ -43,7 +43,10 @@
         Audio
       </dt>
       <dd>
-        <%= @episode.audio %>
+        <audio id="player" controls>
+          <source src="<%= @episode.audio_url %>" type="audio/mp3">
+        </audio>
+        <%= @episode.audio_url %>
       </dd>
 
       <dt>

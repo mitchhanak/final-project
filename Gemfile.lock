@@ -159,6 +159,7 @@ GEM
     factory_bot_rails (5.0.2)
       factory_bot (~> 5.0.2)
       railties (>= 4.2.0)
+    fastimage (2.1.5)
     ffi (1.10.0)
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
@@ -220,6 +221,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mini_magick (4.9.3)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
@@ -396,11 +398,13 @@ DEPENDENCIES
   dotenv-rails
   draft_generators!
   factory_bot_rails
+  fastimage
   grade_runner!
   jbuilder (~> 2.5)
   letter_opener
   listen (>= 3.0.5, < 3.2)
   meta_request
+  mini_magick
   pg
   pry-rails
   puma (~> 3.7)

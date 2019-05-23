@@ -19,4 +19,6 @@ class Ad < ApplicationRecord
     has_many :podcasts, :through => :ad_permissions, :source => :podcast
     has_many :episodes, :through => :placements, :source => :episode
     has_many :users, :through => :podcasts, :source => :user
+    
+    mount_uploader :image, AdUploader
 end

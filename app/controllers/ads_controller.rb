@@ -23,11 +23,9 @@ class AdsController < ApplicationController
 
     @ad.created_by = current_user.id
     @ad.name = params.fetch("name")
-##    @ad.width = params.fetch("width")
-##    @ad.height = params.fetch("height")
-##    @ad.image = params.fetch("image")
+    @ad.image = params.fetch("image")
     @ad.target_url = params.fetch("target_url")
-
+    
     if @ad.valid?
       @ad.save
 

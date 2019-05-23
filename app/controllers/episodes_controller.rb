@@ -24,7 +24,7 @@ class EpisodesController < ApplicationController
 
     @episode.title = params.fetch("title")
     @episode.podcast_id = @podcast.id
-##    @episode.audio = params.fetch("audio")
+    @episode.audio = params[:audio]
 ##    @episode.xml = params.fetch("xml")
     @episode.description = params.fetch("description")
 

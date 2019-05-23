@@ -5,7 +5,7 @@
 
 <hr>
 
-<form action="/create_ad" method="post">
+<form action="/create_ad" method="post" enctype="multipart/form-data">
 
   <div class="form-group">
     <label for="name">
@@ -20,12 +20,13 @@
       Image
     </label>
 
-    <input type="text" id="image" name="image" class="form-control">
+    <input type="file" id="image" name="image" class="form-control">
+    <i>Image will be rescaled to fit within 1500x1500 window</i>
   </div>
 
   <div class="form-group">
     <label for="target_url">
-      Target url
+      Target URL
     </label>
 
     <input type="text" id="target_url" name="target_url" class="form-control">

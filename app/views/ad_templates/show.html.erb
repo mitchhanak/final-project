@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h1>
-      Ad #<%= @ad.id %> details
+      Ad: <%= @ad.name %> details
     </h1>
 
     <div class="row mb-3">
@@ -26,12 +26,14 @@
 
     <dl>
       <dt>
-        Created by
+        Image
       </dt>
       <dd>
-        <%= @ad.created_by %>
+        <% unless @ad.image_url.nil? %>
+        <%= image_tag(@ad.image_url) %>
+        <% end %>
       </dd>
-
+      
       <dt>
         Name
       </dt>
@@ -40,38 +42,24 @@
       </dd>
 
       <dt>
-        Width
+        Dimensions
       </dt>
       <dd>
-        <%= @ad.width %>
+        <%= @ad.width %> x <%= @ad.height %>
       </dd>
 
       <dt>
-        Height
-      </dt>
-      <dd>
-        <%= @ad.height %>
-      </dd>
-
-      <dt>
-        Image
-      </dt>
-      <dd>
-        <%= @ad.image %>
-      </dd>
-
-      <dt>
-        Target url
+        Target URL
       </dt>
       <dd>
         <%= @ad.target_url %>
       </dd>
-
+      
       <dt>
-        Created at
+        Created by
       </dt>
       <dd>
-        <%= time_ago_in_words(@ad.created_at) %> ago
+        <%= @ad.created_by %> <%= time_ago_in_words(@ad.created_at) %> ago
       </dd>
 
       <dt>
@@ -81,6 +69,29 @@
         <%= time_ago_in_words(@ad.updated_at) %> ago
       </dd>
     </dl>
+    
+    <h1>Ad Placements</h1>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Start time</th>
+          <th>End time</th>
+          <th>Episode</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <% @placements.each do |placement| %>
+        <tr>
+          <td><a href="/placements/<%= placement.id %>"><b><%= placement.id %></b></a></td>
+          <td><%= placement.timestamp_start %></td>
+          <td><%= placement.timestamp_end %></td>
+          <td><%= placement.ad_id %></td>
+          <td>Created <%= time_ago_in_words(placement.created_at) %> ago </br> by <%= User.find(placement.created_by).username %></td>
+          <td><a href="/placements/<%= placement.id %>" class="btn btn-block btn-outline-primary">Show details</a></td>
+          
+        </tr>
+        <% end %>
+      </table>
   </div>
 </div>
 

@@ -5,7 +5,7 @@
 
 <hr>
 
-<form action="/create_episode/<%= @podcast.id %>" method="post">
+<form action="/create_episode/<%= @podcast.id %>" method="post" enctype="multipart/form-data">
 
   <div class="form-group">
     <label for="title">
@@ -17,7 +17,7 @@
 
   <div class="form-group">
     <label for="audio">
-      Audio (Coming soon)
+      Audio
     </label>
 
     <input type="file" id="audio" name="audio" class="form-control">
