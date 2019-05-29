@@ -22,8 +22,8 @@ class PlacementsController < ApplicationController
     @placement = current_user.placements.new
     @episode = Episode.find(params.fetch("episodeid"))
 
-    @placement.position_x = params.fetch("position_x")
-    @placement.position_y = params.fetch("position_y")
+    @placement.position_x = params.fetch("posx")
+    @placement.position_y = params.fetch("posy")
     @placement.ad_id = params.fetch("ad_id")
     @placement.episode_id = @episode.id
 ##    @placement.created_by = params.fetch("created_by")

@@ -7,47 +7,51 @@
     <hr>
     
     <div class="row mb-3">
-      <div class="col-md-6">
-        <%= image_tag(Podcast.find(@episode.podcast_id).logo_url(:standard)) %>
-      </div>
-    </div>
-    
-    <div class="row mb-3">
       <div class="col">
         <h3>New Placement</h3>
-    <table>
+
       <form action="/create_placement/<%= @episode.id %>">
-      <tr>
-        <th><label for="ad">Ad</label></th>
-        <th></th>
-        <th><label for="start">Start Time</label></th>
-        <th><label for="end">End Time</label></th>
-        <th></th>
-      </tr>
-        <tr>
-          <td>
-            <select id="adselect" name="adselect">
-              <% Ad.all.order(:name => :asc).each do |thisad| %>
-                <option value=<%= thisad.id %> img-src=<%= thisad.image_url(:thumbnail) %>><%= thisad.name %></option>
-              <% end %>
-            </select>
-          </td>
-          <td>
-             <img id="imageToSwap" name="imageToSwap" src=<%= Ad.all.order(:name => :asc).first.image_url(:thumbnail) %> >
-          </td>
-          <td>
-            <input type="text" id="start" name="start" placeholder="Start time..." >
-          </td>
-          <td>
-            <input type="text" id="end" name="end" placeholder="End time..." >
-          </td>
-          <td>
-            <button>Place ad</button>
-          </td>
-        </tr>
+        <label for="ad">Ad</label>
+          <select id="adSelect" name="adSelect" onChange="setImage()">
+            <option value="" selected></option>
+            <% Ad.all.order(:name => :asc).each do |thisad| %>
+              <option value=<%= thisad.id %> imgsrc="<%= thisad.image_url(:standard) %>"><%= thisad.name %></option>
+            <% end %>
+          </select>
+        <label for="start">Start Time</label>
+          <input type="text" id="start" name="start" placeholder="Start time..." >
+        <label for="end">End Time</label>
+          <input type="text" id="end" name="end" placeholder="End time..." >
+        <label for="posx">X-position</label>
+          <input type="text" id="posx" name="posx" placeholder="Left edge position..." >
+        <label for="posy">Y-position</label>
+          <input type="text" id="posy" name="posy" placeholder="Top edge position..." >
+        <button>Place ad</button>
       </form>
-    </table>
+      
       </div>
+<!-- DRAG AND DROP CANVAS BEGIN -->
+      
+      <div class="col">
+          <div id="container">
+            <div class="konvajs-content" role="presentation" style="position: relative; user-select: none; width: 500px; height: 500px;">
+              <canvas width="500" height="500" style="padding: 0px; margin: 0px; border: 0px; background: transparent; position: absolute; 
+                                                      top: 0px; left: 0px; width: 500px; height: 500px; display: block;">
+              </canvas>
+            </div>
+        </div>
+
+  <!-- set logo url variable for js -->
+        <script>
+          var imgurl = '<%= Podcast.find(@episode.podcast_id).logo_url(:standard) %>';
+          var adurl = '<%= Ad.all.order( :name => :asc ).first.image_url(:standard) %>';
+        </script>
+
+        <%= javascript_include_tag "fullcanvas" %>
+      </div>
+      
+<!-- DRAG AND DROP CANVAS END -->
+
     </div>
     
     <div class="row mb-3">
