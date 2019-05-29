@@ -37,7 +37,7 @@
         Logo
       </dt>
       <dd>
-        <%= cl_image_tag(@podcast.logo.full_public_id, :format => "jpg", :width => 450, :radius => 10) %>
+        <%= image_tag(@podcast.logo_url(:standard)) %>
       </dd>
       <dt>
         System Information

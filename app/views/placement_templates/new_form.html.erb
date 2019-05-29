@@ -1,47 +1,83 @@
-<h1>
-  Add a new placement
-</h1>
-
-
-<hr>
-
-<form action="/create_placement/<%= @episode.id %>" method="post">
-
-  <div class="form-group">
-    <label for="position_x">
-      Position x
-    </label>
-
-    <input type="text" id="position_x" name="position_x" class="form-control">
-  </div>
-
-  <div class="form-group">
-    <label for="position_y">
-      Position y
-    </label>
-
-    <input type="text" id="position_y" name="position_y" class="form-control">
-  </div>
-
-  <div class="form-group">
-    <label for="ad_id">
-      Ad
-    </label>
-
-    <select id="ad_id" name="ad_id" class="form-control">
-      <% Ad.all.order( :created_at => :desc ).each do |ad| %>
-      <option value="<%= ad.id %>">
-        <%= ad.name %>
-      </option>
+<div class="row mb-3">
+  <div class="col-md-16">
+    <h1>
+      Add placements to <%= @episode.title %>
+    </h1>
+    
+    <hr>
+    
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= image_tag(Podcast.find(@episode.podcast_id).logo_url(:standard)) %>
+      </div>
+    </div>
+    
+    <div class="row mb-3">
+      <div class="col">
+        <h3>New Placement</h3>
+    <table>
+      <form action="/create_placement/<%= @episode.id %>">
+      <tr>
+        <th><label for="ad">Ad</label></th>
+        <th></th>
+        <th><label for="start">Start Time</label></th>
+        <th><label for="end">End Time</label></th>
+        <th></th>
+      </tr>
+        <tr>
+          <td>
+            <select id="adselect" name="adselect">
+              <% Ad.all.order(:name => :asc).each do |thisad| %>
+                <option value=<%= thisad.id %> img-src=<%= thisad.image_url(:thumbnail) %>><%= thisad.name %></option>
+              <% end %>
+            </select>
+          </td>
+          <td>
+             <img id="imageToSwap" name="imageToSwap" src=<%= Ad.all.order(:name => :asc).first.image_url(:thumbnail) %> >
+          </td>
+          <td>
+            <input type="text" id="start" name="start" placeholder="Start time..." >
+          </td>
+          <td>
+            <input type="text" id="end" name="end" placeholder="End time..." >
+          </td>
+          <td>
+            <button>Place ad</button>
+          </td>
+        </tr>
+      </form>
+    </table>
+      </div>
+    </div>
+    
+    <div class="row mb-3">
+      <div class="col">
+      <table>
+      <tr>
+        <th>Ad</th>
+        <th></th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th></th>
+      </tr>
+      
+      <% @episode.placements do |placement| %>
+        <tr>
+          <td><%= Ad.find(placement.ad_id).name %></td>
+          <td><%= image_tag(Ad.find(placement.ad_id).image_url(:thumbnail)) %></td>
+          <td><%= placement.timestamp_start %></td>
+          <td><%= placement.timestamp_end %></td>
+          <td>Remove placement</td>
+        </tr>
       <% end %>
-    </select>
+      
+    </table>
+      </div>
+    </div>
+
+    
   </div>
-
-  <button class="btn btn-block btn-outline-secondary">
-    Create placement
-  </button>
-</form>
-
+</div>
 <hr>
 
 <a href="/placements">

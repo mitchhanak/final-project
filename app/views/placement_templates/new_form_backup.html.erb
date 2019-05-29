@@ -1,0 +1,49 @@
+<h1>
+  Add a new placement
+</h1>
+
+
+<hr>
+
+<form action="/create_placement/<%= @episode.id %>" method="post">
+
+  <div class="form-group">
+    <label for="position_x">
+      Position x
+    </label>
+
+    <input type="text" id="position_x" name="position_x" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="position_y">
+      Position y
+    </label>
+
+    <input type="text" id="position_y" name="position_y" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="ad_id">
+      Ad
+    </label>
+
+    <select id="ad_id" name="ad_id" class="form-control">
+      <% Ad.all.order( :created_at => :desc ).each do |ad| %>
+      <option value="<%= ad.id %>">
+        <%= ad.name %>
+      </option>
+      <% end %>
+    </select>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create placement
+  </button>
+</form>
+
+<hr>
+
+<a href="/placements">
+  Go back
+</a>
