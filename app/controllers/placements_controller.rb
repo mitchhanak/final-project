@@ -26,9 +26,9 @@ class PlacementsController < ApplicationController
     @placement.position_y = params.fetch("posy")
     @placement.ad_id = params.fetch("ad_id")
     @placement.episode_id = @episode.id
-##    @placement.created_by = params.fetch("created_by")
-##    @placement.timestamp_start = params.fetch("timestamp_start")
-##    @placement.timestamp_end = params.fetch("timestamp_end")
+    @placement.created_by = current_user.id
+    @placement.timestamp_start = params.fetch("start")
+    @placement.timestamp_end = params.fetch("end")
 
     if @placement.valid?
       @placement.save

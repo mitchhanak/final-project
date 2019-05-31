@@ -1,3 +1,7 @@
+<script>
+  var imageList = Array();
+</script>
+
 <div class="row mb-3">
   <div class="col-md-16">
     <h1>
@@ -10,12 +14,18 @@
       <div class="col">
         <h3>New Placement</h3>
 
-      <form action="/create_placement/<%= @episode.id %>">
+      <form action="/create_placement/<%= @episode.id %>" method="post">
         <label for="ad">Ad</label>
-          <select id="adSelect" name="adSelect" onChange="setImage()">
-            <option value="" selected></option>
+          <select id="adSelect" name="ad_id" onChange="setImage()">
+            <option selected></option>
+            <script>
+              imageList.push('');
+            </script>
             <% Ad.all.order(:name => :asc).each do |thisad| %>
-              <option value=<%= thisad.id %> imgsrc="<%= thisad.image_url(:standard) %>"><%= thisad.name %></option>
+              <option value=<%= thisad.id %>><%= thisad.name %></option>
+              <script>
+                imageList.push('<%= thisad.image_url(:standard) %>');
+              </script>
             <% end %>
           </select>
         <label for="start">Start Time</label>
@@ -48,10 +58,23 @@
         </script>
 
         <%= javascript_include_tag "fullcanvas" %>
+        <audio id="player" controls>
+          <source src="<%= @episode.audio_url %>" type="audio/mp3">
+        </audio>
+        <script>
+          const player = new Plyr('#player');
+        </script>
+        <div class="row mb-3">
+          <div class="col">
+            <input type="button" value="Set start time" onclick="populateStartTime()">
+          </div>
+          <div class="col">
+            <input type="button" value="Set end time" onclick="populateEndTime()">
+          </div>
+        </div>
       </div>
       
 <!-- DRAG AND DROP CANVAS END -->
-
     </div>
     
     <div class="row mb-3">

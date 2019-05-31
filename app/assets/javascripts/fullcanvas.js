@@ -4,21 +4,15 @@
         height: 500
       });
       
-      var layer = new Konva.Layer();
-      var circle = new Konva.Circle({
-        x: 150,
-        y: 120,
-        radius: 50,
-        fill: 'red',
-        stroke: 'black',
-        strokeWidth: 4,
-        draggable: true
-      });
+      var logolayer = new Konva.Layer();
+      var adlayer = new Konva.Layer();
 
-      // var text = new Konva.Text();
-
+      // instantiate variables?
+      var logo = new Konva.Image();
+      var ad = new Konva.Image();
       var adObj = new Image();
       var logoObj = new Image();
+      
       logoObj.onload = function() {
         var logo = new Konva.Image({
           x: 0,
@@ -28,18 +22,19 @@
           height: 500
         });
       
-
-        // add the logo to the layer FIRST
-      layer.add(logo);
-      
-      // helper text THIRD
-      // layer.add(text);
-      
-      // add the layer to the stage LAST
-      stage.add(layer);
+      logolayer.add(logo);
+      stage.add(logolayer);
       };
 
-      adObj.onload = function() {
+//      adObj.onload = function() {
+        
+//      };
+      
+      function setImage() {
+        adlayer.destroy(ad);
+        var adurl = imageList[document.getElementById('adSelect').selectedIndex];
+        var adObj = new Image();
+        adObj.src = adurl;
         var imageAspectRatio = adObj.width / adObj.height;
         var width, height;
         if(imageAspectRatio > 1) {
@@ -63,15 +58,9 @@
           height: height,
           draggable: true
         });
-      
-      layer.add(ad);
-
-      stage.add(layer);
-      };
-      
-      function setImage() {
-        var x = document.getElementById("adSelect").selectedIndex;
-        var adurl = document.getElementsByTagName("option")[x].imgsrc;
+        ad.on('dragmove', updateText);        
+        adlayer.add(ad);
+        stage.add(adlayer);
       };
 
       logoObj.src = imgurl;
@@ -83,5 +72,11 @@
         document.getElementById("posx").value = e.target.x();
         document.getElementById("posy").value = e.target.y();
       };
+      
+      function populateStartTime() {
+        document.getElementById("start").value = player.currentTime;
+      }
 
-      ad.on('dragmove', updateText);
+      function populateEndTime() {
+        document.getElementById("end").value = player.currentTime;
+      }

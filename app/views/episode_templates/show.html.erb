@@ -70,22 +70,17 @@
     
       <table>
         <tr>
-          <th>ID</th>
           <th>Start time</th>
           <th>End time</th>
           <th>Ad</th>
           <th></th>
-          <th></th>
         </tr>
         <% @placements.each do |placement| %>
         <tr>
-          <td><a href="/placements/<%= placement.id %>"><b><%= placement.id %></b></a></td>
           <td><%= placement.timestamp_start %></td>
           <td><%= placement.timestamp_end %></td>
-          <td><%= placement.ad_id %></td>
-          <td>Created <%= time_ago_in_words(placement.created_at) %> ago </br> by <%= User.find(placement.created_by).username %></td>
-          <td><a href="/placements/<%= placement.id %>" class="btn btn-block btn-outline-primary">Show details</a></td>
-          
+          <td><%= image_tag(Ad.find(placement.ad_id).image_url(:thumbnail)) %></td>
+          <td><a href="/delete_placement/<%= placement.id %>" class="btn btn-block btn-outline-primary">Remove placement</a></td>
         </tr>
         <% end %>
       </table>
