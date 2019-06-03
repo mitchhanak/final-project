@@ -35,43 +35,41 @@
   </head>
 
   <body>
-    <table style="width: 100%; text-align: center">
-      <tr>
-        <td>
-          <a href="/">
-            <strong>storyboard</strong>
-          </a>
-        </td>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">storyboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/podcasts">podcasts</a>
+      <a class="nav-item nav-link" href="/episodes">episodes</a>
+      <a class="nav-item nav-link" href="/ads">ads</a>
+      <a class="nav-item nav-link" href="/placements">placements</a>
+      <a class="nav-item nav-link disabled">permissions</a>
+      <a class="nav-item nav-link disabled">about</a>
 
-        <td>
-          <a href="/podcasts">
-            my podcasts
+      <% if current_user.blank? %>
+        <a class="nav-item nav-link" href="/users/sign_in">
+          Sign in
+        </a>
+        <a class="nav-item nav-link" href="/users/sign_up">
+          Sign up
+        </a>
+      <% else %>
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.username %>         
           </a>
-        </td>
-
-        <td>
-          <a href="/episodes">
-            my episodes
-          </a>
-        </td>
-
-        <td>
-          <a href="/ads">
-            my ads
-          </a>
-        </td>
-        
-        <td>
-          <a href="/placements">
-            my ad placements
-          </a>
-        </td>
-        
-        <td>
-          my ad permissions (beta)
-        </td>
-      </tr>
-    </table>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/users/edit">Update my details</a>
+            <a class="dropdown-item" href="/users/sign_out" data-method="delete">Sign out</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</nav>
     
     <%= yield %>
 

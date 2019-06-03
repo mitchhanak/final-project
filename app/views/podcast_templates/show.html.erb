@@ -37,7 +37,11 @@
         Logo
       </dt>
       <dd>
+        <% if @podcast.logo_url(:standard).nil? %>
+        <i>No logo uploaded</i>
+        <% else %>
         <%= image_tag(@podcast.logo_url(:standard)) %>
+        <% end %>
       </dd>
       <dt>
         System Information
