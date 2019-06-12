@@ -64,8 +64,11 @@ class AdsController < ApplicationController
   def destroy_row
     @ad = Ad.find(params.fetch("id_to_remove"))
 
-    @ad.destroy
-
-    redirect_to("/ads", :notice => "Ad deleted successfully.")
+    if current_user.id == @ad.created_by
+      @ad.destroy
+      redirect_to("/ads", :notice => "Ad deleted successfully.")
+    else
+      redirect_to("/ads/#{@ad.id}", :notice => "Only owner can delete.")
+    end
   end
 end

@@ -63,9 +63,11 @@ class EpisodesController < ApplicationController
 
   def destroy_row
     @episode = Episode.find(params.fetch("id_to_remove"))
-
-    @episode.destroy
-
-    redirect_to("/episodes", :notice => "Episode deleted successfully.")
+    if current_user.id == @episode.created_by
+      @episode.destroy
+      redirect_to("/episodes", :notice => "Episode deleted successfully.")
+    else
+      redirect_to("/episodes/#{@episode.id}", :notice => "Only owner can delete.")
+    end
   end
 end

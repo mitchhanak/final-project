@@ -12,6 +12,9 @@
 #  timestamp_end   :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  script          :string
+#  width           :integer
+#  height          :integer
 #
 
 class Placement < ApplicationRecord

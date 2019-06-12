@@ -29,11 +29,13 @@ class PlacementsController < ApplicationController
     @placement.created_by = current_user.id
     @placement.timestamp_start = params.fetch("start")
     @placement.timestamp_end = params.fetch("end")
+    @placement.width = params.fetch("width")
+    @placement.height = params.fetch("height")
 
     if @placement.valid?
       @placement.save
 
-      redirect_to("/episodes/" + @episode.id.to_s)
+      redirect_to("/placements/new/#{@episode.id}")
     else
       render("placement_templates/new_form_with_errors.html.erb")
     end
@@ -67,9 +69,12 @@ class PlacementsController < ApplicationController
 
   def destroy_row
     @placement = Placement.find(params.fetch("id_to_remove"))
-
-    @placement.destroy
-
-    redirect_to("/placements", :notice => "Placement deleted successfully.")
+    @episode = Episode.find(@placement.episode_id)
+    if current_user.id == @placement.created_by
+      @placement.destroy
+      redirect_to("/placements/new/#{@episode.id}", :notice => "Placement deleted successfully.")
+    else
+      redirect_to("/placements/#{@placement.id}", :notice => "Only owner can delete.")
+    end
   end
 end

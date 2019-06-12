@@ -12,10 +12,8 @@
     
     <div class="row mb-3">
       <div class="col">
-        <h3>New Placement</h3>
-
       <form action="/create_placement/<%= @episode.id %>" method="post">
-        <label for="ad">Ad</label>
+        <label for="ad"><b>Select Ad</b></label>
           <select id="adSelect" name="ad_id" onChange="setImage()">
             <option selected></option>
             <script>
@@ -29,13 +27,16 @@
             <% end %>
           </select>
         <label for="start">Start Time</label>
-          <input type="text" id="start" name="start" placeholder="Start time..." >
+          <input type="text" id="start" name="start" placeholder="Use buttons at right to set..." readonly>
         <label for="end">End Time</label>
-          <input type="text" id="end" name="end" placeholder="End time..." >
+          <input type="text" id="end" name="end" placeholder="Use buttons at right to set..." readonly>
         <label for="posx">X-position</label>
-          <input type="text" id="posx" name="posx" placeholder="Left edge position..." >
+          <input type="text" id="posx" name="posx" placeholder="Left edge position..." readonly value="0">
         <label for="posy">Y-position</label>
-          <input type="text" id="posy" name="posy" placeholder="Top edge position..." >
+          <input type="text" id="posy" name="posy" placeholder="Top edge position..." readonly value="0">
+          <input type="hidden" id="scriptinput" name="scriptinput">
+          <input type="hidden" id="width" name="width">
+          <input type="hidden" id="height" name="height">
         <button>Place ad</button>
       </form>
       
@@ -87,14 +88,16 @@
         <th>End Time</th>
         <th></th>
       </tr>
-      
-      <% @episode.placements do |placement| %>
+      <% @episode.placements.each do |placement| %>
         <tr>
           <td><%= Ad.find(placement.ad_id).name %></td>
           <td><%= image_tag(Ad.find(placement.ad_id).image_url(:thumbnail)) %></td>
           <td><%= placement.timestamp_start %></td>
           <td><%= placement.timestamp_end %></td>
-          <td>Remove placement</td>
+          <td><a href="/delete_placement/<%= placement.id %>">Delete placement</a></td>
+          <script>
+            reBuild(<%= placement.position_x %>, <%= placement.position_y %>, <%= placement.width %>, <%= placement.height %>, "<%= Ad.find(placement.ad_id).image_url(:standard) %>");
+          </script>
         </tr>
       <% end %>
       

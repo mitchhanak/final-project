@@ -10,7 +10,7 @@
           Go back
         </a>
       </div>
-
+      <% if current_user.id == @placement.created_by %>
       <div class="col">
         <a href="/placements/<%= @placement.id %>/edit" class="btn btn-block btn-outline-secondary">
           Edit placement
@@ -22,6 +22,7 @@
           Delete placement
         </a>
       </div>
+      <% end %>
     </div>
 
     <dl>
@@ -51,6 +52,13 @@
       </dt>
       <dd>
         <%= @placement.episode_id %>
+      </dd>
+      
+      <dt>
+        width x height
+      </dt>
+      <dd>
+        <%= @placement.width %> x <%= placement.height %>
       </dd>
 
       <dt>
