@@ -8,6 +8,8 @@
       var logolayer = new Konva.Layer();
       var adlayer = new Konva.Layer();
       var relayer = new Konva.Layer();
+      var loadedAd = [];
+      var thisObj = [];
       stage.add(logolayer);
       stage.add(relayer);
       stage.add(adlayer);
@@ -85,29 +87,32 @@
       };
       
       // script to rebuild previously placed ads
-      function reBuild(thisX,thisY,thisWidth,thisHeight,thisSrc) {
-        var thisObj = new Image();
-        var loadedAd = new Konva.Image({
+      function reBuild(ind,thisX,thisY,thisWidth,thisHeight,thisSrc) {
+        thisObj[ind] = new Image();
+        loadedAd[ind] = new Konva.Image({
           x: thisX,
           y: thisY,
-          image: thisObj,
+          image: thisObj[ind],
           width: thisWidth,
           height: thisHeight,
           draggable: false
         });
-        thisObj.src = thisSrc;
+        thisObj[ind].src = thisSrc;
         
-        relayer.add(loadedAd);
+        relayer.add(loadedAd[ind]);
+        loadedAd[ind].hide();
         relayer.draw();
       };
       
-      // script for the start time / end time buttons
-      function populateStartTime() {
-        document.getElementById("start").value = player.currentTime;
-      };
-      function populateEndTime() {
-        document.getElementById("end").value = player.currentTime;
-      };
+      // functions for showing and hiding ads; executed via html
+      function adShower(ind) {
+        loadedAd[ind].show();
+        relayer.draw();
+      }
+      function adHider(ind) {
+        loadedAd[ind].hide();
+        relayer.draw();
+      }
       
       // add the listener to update x/y coordinates in HTML form
       ad.on('dragmove', updateText);

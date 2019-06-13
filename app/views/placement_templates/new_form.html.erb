@@ -34,7 +34,7 @@
           <input type="text" id="posx" name="posx" placeholder="Left edge position..." readonly value="0">
         <label for="posy">Y-position</label>
           <input type="text" id="posy" name="posy" placeholder="Top edge position..." readonly value="0">
-          <input type="hidden" id="scriptinput" name="scriptinput">
+          <input type="text" id="currentTime" name="currentTime">
           <input type="hidden" id="width" name="width">
           <input type="hidden" id="height" name="height">
         <button>Place ad</button>
@@ -59,12 +59,14 @@
         </script>
 
         <%= javascript_include_tag "fullcanvas" %>
+
         <audio id="player" controls>
           <source src="<%= @episode.audio_url %>" type="audio/mp3">
         </audio>
         <script>
-          const player = new Plyr('#player');
+          
         </script>
+        <%= javascript_include_tag "audiofunctions" %>
         <div class="row mb-3">
           <div class="col">
             <input type="button" value="Set start time" onclick="populateStartTime()">
@@ -88,6 +90,7 @@
         <th>End Time</th>
         <th></th>
       </tr>
+      <% p = 0 %>
       <% @episode.placements.each do |placement| %>
         <tr>
           <td><%= Ad.find(placement.ad_id).name %></td>
@@ -96,9 +99,22 @@
           <td><%= placement.timestamp_end %></td>
           <td><a href="/delete_placement/<%= placement.id %>">Delete placement</a></td>
           <script>
-            reBuild(<%= placement.position_x %>, <%= placement.position_y %>, <%= placement.width %>, <%= placement.height %>, "<%= Ad.find(placement.ad_id).image_url(:standard) %>");
+            var a = <%= placement.timestamp_start %>;
+            var b = <%= placement.timestamp_end %>;
+            reBuild(<%= p %>, <%= placement.position_x %>, <%= placement.position_y %>, <%= placement.width %>, <%= placement.height %>, "<%= Ad.find(placement.ad_id).image_url(:standard) %>");
+
+            player.on('timeupdate', function(event) {
+              var c = player.currentTime;
+              document.getElementById('currentTime').value = c;
+              if (c > a && c < b) {
+                adShower(<%= p %>);
+              } else if (c > b) {
+                adHider(<%= p %>);
+              }
+            });
           </script>
         </tr>
+      <% p += 1 %>
       <% end %>
       
     </table>
