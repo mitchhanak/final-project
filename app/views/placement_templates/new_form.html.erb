@@ -1,5 +1,8 @@
 <script>
   var imageList = Array();
+  var a = [];
+  var b = [];
+  var c = 0;
 </script>
 
 <div class="row mb-3">
@@ -99,16 +102,16 @@
           <td><%= placement.timestamp_end %></td>
           <td><a href="/delete_placement/<%= placement.id %>">Delete placement</a></td>
           <script>
-            var a = <%= placement.timestamp_start %>;
-            var b = <%= placement.timestamp_end %>;
+            a[<%= p %>] = <%= placement.timestamp_start %>;
+            b[<%= p %>] = <%= placement.timestamp_end %>;
             reBuild(<%= p %>, <%= placement.position_x %>, <%= placement.position_y %>, <%= placement.width %>, <%= placement.height %>, "<%= Ad.find(placement.ad_id).image_url(:standard) %>");
 
             player.on('timeupdate', function(event) {
-              var c = player.currentTime;
+              c = player.currentTime;
               document.getElementById('currentTime').value = c;
-              if (c > a && c < b) {
+              if (c > a[<%= p %>] && c < b[<%= p %>]) {
                 adShower(<%= p %>);
-              } else if (c > b) {
+              } else if (c > b[<%= p %>]) {
                 adHider(<%= p %>);
               }
             });
