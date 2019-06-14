@@ -1,6 +1,6 @@
 class EpisodesController < ApplicationController
   def index
-    @episodes = Episode.all
+    @episodes = current_user.episodes
 
     render("episode_templates/index.html.erb")
   end

@@ -16,6 +16,8 @@
           Title
         </th>
 
+        <th></th>
+
         <th>
           Podcast
         </th>
@@ -23,17 +25,8 @@
         <th>
           Description
         </th>
-        
-        <th>
-          Created by
-        </th>
 
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
+        <th></th>
       </tr>
 
       <% @episodes.order( :created_at => :desc ).each do |episode| %>
@@ -41,27 +34,24 @@
       <tr>
 
         <td>
-          <a href="/episodes/<%= episode.id %>" ><%= episode.title %></a>
+          <a href="/episodes/<%= episode.id %>" ><%= episode.title %></a> <span class="badge badge-pill badge-light mx-1"><%= episode.placements.count %> ads</span>
         </td>
 
         <td>
-          <%= image_tag(podcast.logo_url(:thumbnail), :width => 50, :height => 50) %><a href="/podcasts/<%= podcast.id %>"</a><%= podcast.title %>
+          <%= image_tag(podcast.logo_url(:thumbnail), :width => 50, :height => 50) %><a href="/podcasts/<%= podcast.id %>"</a>
         </td>
 
         <td>
-          <%= episode.description %>
+          <a href="/podcasts/<%= podcast.id %>" ><%= podcast.title %></a>
         </td>
         
         <td>
-          <%= User.find(episode.created_by).username %>, <%= time_ago_in_words(episode.created_at) %> ago
-        </td>
-        
-        <td>
-          <%= time_ago_in_words(episode.updated_at) %> ago
+          <small><%= episode.description %></br>
+          <%= User.find(episode.created_by).username %>, <%= time_ago_in_words(episode.created_at) %> ago </small>
         </td>
 
         <td>
-          <a href="/episodes/<%= episode.id %>" class="btn btn-block btn-outline-secondary">
+          <a href="/episodes/<%= episode.id %>" class="btn btn-block btn-outline-secondary btn-sm">
             Show details
           </a>
         </td>

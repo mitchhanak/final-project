@@ -19,24 +19,26 @@
     <div class="card-deck">
       <% cards = 0 %>
       <% @podcasts.order( :created_at => :desc ).each do |podcast| %>
-      <% if cards % 3 == 0 %>
+      <% if cards % 3 == 0 && cards != 0 %>
     </div>
     
   </div>
 </div>
 <div class="row mb-3">
   <div class="col-lg-16">
-    
+
     <div class="card-deck">
       <% end %>
       <div class="card bg-dark text-white" style="max-width: 30%">
           <% if podcast.logo.file.nil? %>
           No image
           <% else %>
-          <img class="card-img-top" src="<%= podcast.logo_url %>">
+            <a href="/podcasts/<%= podcast.id %>" class="m-0 p-0">
+              <img class="card-img-top border border-secondary rounded-top" src="<%= podcast.logo_url %>">
+            </a>
           <% end %>
         <div class="card-body">
-          <h5 class="card-title"><%= podcast.title %></h5>
+          <a class="nav-link" href="/podcasts/<%= podcast.id %>"><h5 class="card-title"><%= podcast.title %></h5></a>
           <p class="card-text small">Created by <%= User.find(podcast.created_by).username %> <%= time_ago_in_words(podcast.created_at) %> ago</p>
       
           <ul class="nav nav-pills card-footer-pills small">
@@ -49,7 +51,7 @@
           </ul>
         </div>
         <div class="card-footer">
-          <small class="text-muted">Last updated <%= time_ago_in_words(podcast.updated_at) %></small>
+          <small class="text-muted">Last updated <%= time_ago_in_words(podcast.updated_at) %> ago</small>
         </div>
       </div>
       <% cards = cards + 1 %>

@@ -14,11 +14,11 @@
     <hr>
     
     <div class="row mb-3">
-      <div class="col">
+      <div class="col-auto">
       <form action="/create_placement/<%= @episode.id %>" method="post">
-        <label for="ad"><b>Select Ad</b></label>
-          <select id="adSelect" name="ad_id" onChange="setImage()">
-            <option selected></option>
+        <label for="ad" class="sr-only"><b>Select Ad</b></label>
+          <select id="adSelect" name="ad_id" onChange="setImage()" class="form-control custom-select bg-secondary text-white mb-2">
+            <option selected>Select ad...</option>
             <script>
               imageList.push('');
             </script>
@@ -29,18 +29,44 @@
               </script>
             <% end %>
           </select>
+          
         <label for="start">Start Time</label>
-          <input type="text" id="start" name="start" placeholder="Use buttons at right to set..." readonly>
+        <div class="input-group mb-2">
+          <div class="input-group-addon p-0">
+            <button type="button" class="btn btn-secondary bg-secondary m-0" onclick="populateStartTime()">Set</button>
+          </div>
+          <input type="text" id="start" name="start" class="form-control bg-dark text-white" aria-describedby="basic-addon1">
+        </div>
+        
         <label for="end">End Time</label>
-          <input type="text" id="end" name="end" placeholder="Use buttons at right to set..." readonly>
-        <label for="posx">X-position</label>
-          <input type="text" id="posx" name="posx" placeholder="Left edge position..." readonly value="0">
-        <label for="posy">Y-position</label>
-          <input type="text" id="posy" name="posy" placeholder="Top edge position..." readonly value="0">
-          <input type="text" id="currentTime" name="currentTime">
+        <div class="input-group mb-2">
+          <div class="input-group-addon p-0">
+            <button class="btn btn-secondary m-0 bg-secondary" type="button" onclick="populateEndTime()">Set</button>
+          </div>
+          <input type="text" id="end" name="end" class="form-control bg-dark text-white" aria-describedby="basic-addon1">
+        </div>
+        
+        <label>Position</label>
+        <label for="posx" class="sr-only">X-position</label>
+        <div class="input-group">
+          <div class="input-group-addon bg-dark text-white">
+            <span class="input-group-text m-1" id="xlabel">x</span>
+          </div>          
+          <input type="text" id="posx" name="posx" class="form-control bg-dark text-white" readonly value="0" aria-describedby="xlabel">
+        </div>
+          
+        <label for="posy" class="sr-only">Y-position</label>
+        <div class="input-group mb-3">
+          <div class="input-group-addon bg-dark text-white">
+            <span class="input-group-text m-1" id="ylabel">y</span>
+          </div>
+          <input type="text" id="posy" name="posy" class="form-control bg-dark text-white" readonly value="0" aria-describedby="ylabel">
+        </div>
+          
           <input type="hidden" id="width" name="width">
           <input type="hidden" id="height" name="height">
-        <button>Place ad</button>
+          
+        <button class="btn btn-primary float-right">Place ad</button>
       </form>
       
       </div>
@@ -108,7 +134,6 @@
 
             player.on('timeupdate', function(event) {
               c = player.currentTime;
-              document.getElementById('currentTime').value = c;
               if (c > a[<%= p %>] && c < b[<%= p %>]) {
                 adShower(<%= p %>);
               } else if (c > b[<%= p %>]) {
@@ -129,6 +154,6 @@
 </div>
 <hr>
 
-<a href="/placements">
+<a href="/episodes/<%= @episode.id %>">
   Go back
 </a>

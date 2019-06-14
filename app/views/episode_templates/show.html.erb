@@ -1,7 +1,14 @@
+<script>
+  var imageList = Array();
+  var a = [];
+  var b = [];
+  var c = 0;
+</script>
+
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      Episode #<%= @episode.id %> details
+      Episode details: "<%= @episode.title %>" by <%= @podcast.title %>
     </h1>
 
     <div class="row mb-3">
@@ -27,13 +34,6 @@
 
     <dl>
       <dt>
-        Title
-      </dt>
-      <dd>
-        <%= @episode.title %>
-      </dd>
-
-      <dt>
         Podcast
       </dt>
       <dd>
@@ -41,12 +41,33 @@
       </dd>
 
       <dt>
-        Audio
+        Episode Preview
       </dt>
       <dd>
+      <div style="width:500px">
+          <div id="container">
+            <div class="konvajs-content" role="presentation" style="position: relative; user-select: none; width: 500px; height: 500px;">
+              <canvas width="500" height="500" style="padding: 0px; margin: 0px; border: 0px; background: transparent; position: absolute; 
+                                                      top: 0px; left: 0px; width: 500px; height: 500px; display: block;">
+              </canvas>
+            </div>
+        </div>
+
+  <!-- set logo url variable for js -->
+        <script>
+          var imgurl = '<%= Podcast.find(@episode.podcast_id).logo_url(:standard) %>';
+        </script>
+
+        <%= javascript_include_tag "showcanvas" %>
+
         <audio id="player" controls>
           <source src="<%= @episode.audio_url %>" type="audio/mp3">
         </audio>
+        <script>
+          
+        </script>
+        <%= javascript_include_tag "audiofunctions" %>
+      </div>
       </dd>
 
       <dt>
@@ -55,6 +76,8 @@
       <dd>
         <%= @episode.description %>
       </dd>
+      
+      <small>
       <dt>System info</dt>
       <dd>
         Created by <%= User.find(@episode.created_by).username %> <%= time_ago_in_words(@episode.created_at) %> ago
@@ -62,10 +85,15 @@
       <dd>
         Updated <%= time_ago_in_words(@episode.updated_at) %> ago
       </dd>
+      </small>
     </dl>
+    <div class="row mb-3">
+      <button class="btn btn-block btn-secondary">Export XML [beta]</button>
+      <button class="btn btn-block btn-secondary">Publish podcast [beta]</button>
+    </div>
     
     <h1>Ad Placements</h1>
-    <a href="/placements/new/<%= @episode.id %>" class="btn btn-block btn-outline-secondary">
+    <a href="/placements/new/<%= @episode.id %>" class="btn btn-block btn-primary">
       Add a new ad placement
     </a>
     
@@ -76,6 +104,7 @@
           <th>Ad</th>
           <th></th>
         </tr>
+        <% p = 0 %>
         <% @placements.each do |placement| %>
         <tr>
           <td><%= placement.timestamp_start %></td>
@@ -83,6 +112,21 @@
           <td><%= image_tag(Ad.find(placement.ad_id).image_url(:thumbnail)) %></td>
           <td><a href="/delete_placement/<%= placement.id %>" class="btn btn-block btn-outline-primary">Remove placement</a></td>
         </tr>
+          <script>
+            a[<%= p %>] = <%= placement.timestamp_start %>;
+            b[<%= p %>] = <%= placement.timestamp_end %>;
+            reBuildPlus(<%= p %>, <%= placement.position_x %>, <%= placement.position_y %>, <%= placement.width %>, <%= placement.height %>, "<%= Ad.find(placement.ad_id).image_url(:standard) %>", "<%= Ad.find(placement.ad_id).target_url %>");
+
+            player.on('timeupdate', function(event) {
+              c = player.currentTime;
+              if (c > a[<%= p %>] && c < b[<%= p %>]) {
+                adShower(<%= p %>);
+              } else if (c > b[<%= p %>]) {
+                adHider(<%= p %>);
+              }
+            });
+          </script>
+          <% p += 1 %>
         <% end %>
       </table>
   </div>

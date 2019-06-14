@@ -58,7 +58,7 @@ class PodcastsController < ApplicationController
 
   def destroy_row
     @podcast = Podcast.find(params.fetch("id_to_remove"))
-    if current_user == @podcast.created_by
+    if current_user.id == @podcast.created_by
       @podcast.destroy
       redirect_to("/podcasts", :notice => "Podcast deleted successfully.")
     else

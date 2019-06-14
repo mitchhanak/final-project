@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h1>
-      Podcast #<%= @podcast.id %> details
+      Podcast details: <%= @podcast.title %>
     </h1>
 
     <div class="row mb-3">
@@ -28,13 +28,6 @@
 
     <dl>
       <dt>
-        Title
-      </dt>
-      <dd>
-        <%= @podcast.title %>
-      </dd>
-    
-      <dt>
         Logo
       </dt>
       <dd>
@@ -44,6 +37,7 @@
         <%= image_tag(@podcast.logo_url(:standard)) %>
         <% end %>
       </dd>
+      <small>
       <dt>
         System Information
       </dt>
@@ -53,6 +47,7 @@
       <dd>
         Last updated <%= time_ago_in_words(@podcast.updated_at) %> ago
       </dd>
+      </small>
     </dl>
 
       <h1>Episodes</h1>
@@ -62,16 +57,21 @@
     
       <table>
         <tr>
-          <th width="50%"></th>
           <th width="40%"></th>
-          <th width="10%"></th>
+          <th width="40%"></th>
+          <th width="20%"></th>
         </tr>
         <% @episodes = Episode.where({:podcast_id => @podcast.id}).order(:created_at => :desc) %>
         <% @episodes.each do |episode| %>
         <tr>
-          <td><a href="/episodes/<%= episode.id %>"><b><%= episode.title %></b></a> <p><%= episode.description %></p> </td>
-          <td>Created <%= time_ago_in_words(episode.created_at) %> ago </br> by <%= User.where({ :id=> episode.created_by }).first.username %></td>
-          <td></td>
+          <td>
+            <a href="/episodes/<%= episode.id %>"><b><%= episode.title %></b></a> </br>
+            <small><p><%= episode.description %></p></small> 
+          </td>
+          <small>
+            <td>Created <%= time_ago_in_words(episode.created_at) %> ago </br> by <%= User.where({ :id=> episode.created_by }).first.username %></td>
+            <td><%= episode.placements.count %> ads placed</td>
+          </small>
         </tr>
         <% end %>
       </table>

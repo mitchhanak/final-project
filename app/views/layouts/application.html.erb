@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FinalProject</title>
+    <title>storyboard: podcasts get visual.</title>
     <%= csrf_meta_tags %>
 
     <!-- Expand the number of characters we can use in the document beyond basic ASCII 🎉 -->
@@ -32,23 +32,23 @@
     <%= javascript_include_tag 'application' %>
     
     <link rel="stylesheet" href="/dark.css">
+    <link rel="stylesheet" href="/sidenav.css">
   </head>
 
   <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">storyboard</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3 p-0">
+  <a class="navbar-brand" href="/" class="m-0"><img src="/logo-small.png" width="50" height="50"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="/podcasts">podcasts</a>
-      <a class="nav-item nav-link" href="/episodes">episodes</a>
-      <a class="nav-item nav-link" href="/ads">ads</a>
-      <a class="nav-item nav-link" href="/placements">placements</a>
-      <a class="nav-item nav-link disabled">permissions</a>
-      <a class="nav-item nav-link disabled">about</a>
-
+    <ul class="navbar-nav mr-auto">
+      <li><a class="nav-item nav-link" href="/podcasts">podcasts</a></li>
+      <li><a class="nav-item nav-link" href="/episodes">episodes</a></li>
+      <li><a class="nav-item nav-link" href="/ads">ads</a></li>
+      <li><a class="nav-item nav-link disabled">permissions (BETA)</a></li>
+      <li><a class="nav-item nav-link disabled">about</a></li>
+    </ul>
       <% if current_user.blank? %>
         <a class="nav-item nav-link" href="/users/sign_in">
           Sign in
@@ -65,11 +65,49 @@
             <a class="dropdown-item" href="/users/edit">Update my details</a>
             <a class="dropdown-item" href="/users/sign_out" data-method="delete">Sign out</a>
           </div>
-        </div>
+        
       <% end %>
+      </div>
+    </div>
+</nav>
+<% if current_user.blank? && current_user.podcasts.count == 0 %>
+<% else %>
+<div class="sidenav mx-2 my-3">
+  <img src="/storyboard logo v5 cropped.png" class="my-1">
+  <h5 class="mt-3">Episode Navigation</h5>
+  <div class="accordion" id="accordionExample">
+    <% current_user.podcasts.each do |podcast| %>
+  <div class="card bg-transparent text-white">
+    <div class="card-header bg-dark p-0" id="heading<%= podcast.id %>">
+        <img src="<%= podcast.logo_url(:thumbnail) %>">
+        <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapse<%= podcast.id %>" aria-expanded="false" aria-controls="collapse<%= podcast.id %>">
+          <%= podcast.title %>
+        </button>
+    </div>
+
+    <div id="collapse<%= podcast.id %>" class="collapse" aria-labelledby="heading<%= podcast.id %>" data-parent="#accordionExample">
+      <div class="m-2 ml-3">
+        <% if podcast.episodes.count == 0 %>
+        <i class="mx-1">No episodes to display</i>
+        </br>
+        <% else %>
+        <% podcast.episodes.each do |episode| %>
+          <a href="/episodes/<%= episode.id %>" class="card-link text-white"><%= episode.title %></a>
+          <span class="badge badge-pill badge-light mx-1"><%= episode.placements.count %> ads</span>
+          </br>
+        <% end %>
+        <% end %>
+        <a href="/episodes/new/<%= podcast.id %>" class="btn btn-primary btn-sm text-white float-right m-1">
+          Add episode
+        </a>
+      </div>
     </div>
   </div>
-</nav>
+  <% end %>
+  </div>
+</div>
+<% end %>
+
     
     <%= yield %>
 
