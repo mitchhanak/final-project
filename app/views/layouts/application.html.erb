@@ -70,7 +70,8 @@
       </div>
     </div>
 </nav>
-<% if current_user.blank? && current_user.podcasts.count == 0 %>
+<% if current_user.blank? %>
+<% elsif current_user.podcasts.count == 0 %>
 <% else %>
 <div class="sidenav mx-2 my-3">
   <img src="/storyboard logo v5 cropped.png" class="my-1">
